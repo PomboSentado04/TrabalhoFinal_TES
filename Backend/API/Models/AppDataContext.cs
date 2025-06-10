@@ -11,5 +11,10 @@ namespace API.Models
         public DbSet<FilmeSerie> FilmeSerie { get; set; }
         public DbSet<Avaliacao> Avaliacoes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=AvaliacaoFilmesSeries.db");
+        }
     }
 }
