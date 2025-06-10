@@ -13,9 +13,9 @@ namespace API.Models
         public DateTime DataAvaliacao { get; set; } = DateTime.Now;
 
         public int FilmeSerieId { get; set; } // Chave estrangeira
-        public FilmeSerie? FilmeSerie { get; set; }
+        public FilmeSerie? FilmeSerie { get; set; } // Relação 1 Avaliação / 1 FilmeSerie
 
         public int UsuarioId { get; set; } // Chave estrangeira
-        public Usuario? Usuario { get; set; }
+        public Usuario? Usuario { get; set; } // Relação 1 Avaliação / 1 Usuário
     }
 }

@@ -11,5 +11,6 @@ namespace API.Models
         public string? Titulo { get; set; } // Máximo: 100 caracteres
         public string? Diretor { get; set; } // Máximo: 50 caracteres
         public int Ano { get; set; }
+        public ICollection<Avaliacao>? Avaliacoes { get; set; } // Relação 1 FilmeSerie / várias Avalições
     }
 }

@@ -10,5 +10,6 @@ namespace API.Models
         public int Id { get; set; } // Chave primária, auto incrementar
         public string? Nome { get; set; } // Máximo: 50 caracteres
         public string? Email { get; set; } // Máximo: 50 caracteres
+        public ICollection<Avaliacao>? Avaliacoes { get; set; } // Relação 1 Usuário / várias Avalições
     }
 }
