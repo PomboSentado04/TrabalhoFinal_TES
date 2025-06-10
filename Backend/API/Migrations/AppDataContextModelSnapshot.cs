@@ -24,15 +24,26 @@ namespace API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Comentario")
+                        .HasMaxLength(1000)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DataAvaliacao")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Nota")
+                    b.Property<int>("FilmeSerieId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Nota")
+                        .HasColumnType("REAL");
+
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FilmeSerieId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Avaliacoes");
                 });
@@ -47,9 +58,11 @@ namespace API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Diretor")
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Titulo")
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -64,14 +77,45 @@ namespace API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("API.Models.Avaliacao", b =>
+                {
+                    b.HasOne("API.Models.FilmeSerie", "FilmeSerie")
+                        .WithMany("Avaliacoes")
+                        .HasForeignKey("FilmeSerieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.Usuario", "Usuario")
+                        .WithMany("Avaliacoes")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FilmeSerie");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("API.Models.FilmeSerie", b =>
+                {
+                    b.Navigation("Avaliacoes");
+                });
+
+            modelBuilder.Entity("API.Models.Usuario", b =>
+                {
+                    b.Navigation("Avaliacoes");
                 });
 #pragma warning restore 612, 618
         }
